@@ -10,7 +10,7 @@ class Mark(models.Model):
 
 
 class Madel(models.Model):
-    marks = models.ForeignKey(Mark, on_delete=models.CASCADE, null=True)
+    marks = models.ForeignKey(Mark, on_delete=models.CASCADE)
     name = models.CharField(max_length=255)
 
     def __str__(self):
@@ -30,18 +30,15 @@ class Car(models.Model):
     def __str__(self):
         return self.marka.name
 
-class Comment(models.Model):
-    author = models.ForeignKey(User, on_delete=models.PROTECT)
-    text = models.CharField(max_length=500)
-
-
 class Ads(models.Model):
     user = models.ForeignKey(User, on_delete=models.PROTECT)
     name = models.CharField(max_length=255)
-    comment = models.ForeignKey(Comment, on_delete=models.CASCADE)
     car = models.ForeignKey(Car, on_delete=models.CASCADE)
     def __str__(self):
         return self.name
 
-
+class Comment(models.Model):
+    author = models.ForeignKey(User, on_delete=models.PROTECT)
+    text = models.CharField(max_length=500)
+    ads = models.ForeignKey(Ads, on_delete=models.CASCADE)
 
