@@ -18,31 +18,37 @@ class MarkSerializer(serializers.ModelSerializer):
         fields = ['id', 'name']
 
 class MadelSerializer(serializers.ModelSerializer):
-    # marks = MarkSerializer()
+
     class Meta:
         model = Madel
         fields = '__all__'
 
 class CarSerializer(serializers.ModelSerializer):
 
-    # marka = MarkSerializer()
-    # model = MadelSerializer()
-    # color = ColorSerializer()
-
     class Meta:
         model = Car
-        fields = [ 'id', 'marka', 'model', 'color',]
+        fields = '__all__'
+
+class CarFullSerializer(serializers.ModelSerializer):
+    marka = MarkSerializer()
+    class Meta:
+        model = Car
+        fields = '__all__'
 
 class CommentSerializer(serializers.ModelSerializer):
-    # author = UserSerializer()
+
     class Meta:
         model = Comment
-        fields = ['author', 'text']
+        fields = '__all__'
 
 class AdsSerializer(serializers.ModelSerializer):
-    # author = UserSerializer()
-    # comment = CommentSerializer
-    # car = CarSerializer
+
     class Meta:
         model = Ads
-        fields = ['author', 'comment', 'car']
+        fields = '__all__'
+
+class CarsListSerializer(serializers.ModelSerializer):
+    serializer_class = AdsSerializer
+    class Meta:
+        model = Car
+        fields = '__all__'

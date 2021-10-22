@@ -36,6 +36,12 @@ class MadelViewSet(viewsets.ModelViewSet):
 class CarViewSet(viewsets.ModelViewSet):
     queryset = Car.objects.all()
     serializer_class = CarSerializer
+    def list(self, request, *args, **kwargs):
+        self.serializer_class = CarFullSerializer
+        return super().list(self, request, *args, **kwargs)
+    def retrieve(self, request, *args, **kwargs):
+        self.serializer_class = CarFullSerializer
+        return super().retrieve(self, request, *args, **kwargs)
 
 class CommentViewSet(viewsets.ModelViewSet):
     queryset = Comment.objects.all()
@@ -44,3 +50,7 @@ class CommentViewSet(viewsets.ModelViewSet):
 class AdsViewSet(viewsets.ModelViewSet):
     queryset = Ads.objects.all()
     serializer_class =AdsSerializer
+
+class CarsListView(generics.ListAPIView):
+    serializer_class = CarsListSerializer
+    queryset = Car.objects.all()

@@ -11,6 +11,8 @@ router.register(r'comments', views.CommentViewSet)
 router.register(r'marks', views.MarkViewSet)
 router.register(r'models', views.MadelViewSet)
 router.register(r'colors', views.ColorViewSet)
+# router.register(r'detail', views.CarsListView)
+
 
 
 urlpatterns= [
